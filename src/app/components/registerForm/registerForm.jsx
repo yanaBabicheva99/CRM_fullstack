@@ -1,7 +1,7 @@
 import React from 'react';
-import InputForm from "./inputForm/inputForm";
+import InputForm from "../inputForm/inputForm";
 import {useState} from "react";
-
+import style from './registerForm.module.scss'
 const RegisterForm = () => {
     const [data, setData] = useState(
         {
@@ -21,8 +21,8 @@ const RegisterForm = () => {
         ))
     }
     return (
-        <form>
-            <div className="d-flex justify-content-between">
+        <form className={style.form}>
+            <div className={style.form__wrapper}>
                 <InputForm
                     label='First Name'
                     name='name'
@@ -62,7 +62,7 @@ const RegisterForm = () => {
                 value={data.repeatPassword}
                 onChange={handleChange}
             />
-            <button>Create account</button>
+                <button className={style.form__btn}>Create account</button>
         </form>
     )
 };

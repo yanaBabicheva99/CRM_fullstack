@@ -1,22 +1,19 @@
 import React from 'react';
-
-const InputForm = ({label, type, name, value, onChange}) => {
+import style from './inputForm.module.scss';
+const InputForm = ({label, type = 'text', name, value, onChange}) => {
 
     return (
-        // <div className='mb-4'>
-        <>
-            <label htmlFor="">{label}</label>
-            <div className="input-group">
+        <div className={style.input__wrapper}>
+            <label className={style.label} htmlFor="">{label}</label>
                 <input
-                    className='form-control'
+                    className={style.input}
                     type={type}
                     name={name}
                     value={value}
+                    placeholder={label}
                     onChange={onChange}
                 />
-            </div>
-        </>
-        // </div>
+        </div>
     );
 };
 
