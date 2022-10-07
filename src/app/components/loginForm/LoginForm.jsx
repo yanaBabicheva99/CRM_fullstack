@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 
-import InputForm from "../inputForm/inputForm";
+import InputForm from "../inputForm/InputForm";
 
-import style from "../registerForm/registerForm.module.scss";
+import style from "../registerForm/RegisterForm.module.scss";
+import {existenceCheckUser} from "../../utils/User";
 
 
 const LoginForm = () => {
@@ -20,13 +21,19 @@ const LoginForm = () => {
                 [target.name]: target.value
             }
         ))
-    }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        existenceCheckUser(data);
+    };
+
     return (
         <>
             <div className={style.header}>
                 <h1>Sign in</h1>
             </div>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={handleSubmit}>
                 <InputForm
                     label='Email'
                     name='email'

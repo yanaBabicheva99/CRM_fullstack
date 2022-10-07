@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 
-import InputForm from "../inputForm/inputForm";
+import InputForm from "../inputForm/InputForm";
 
-import style from './registerForm.module.scss'
+
+import style from './RegisterForm.module.scss'
+import {addUserNew} from "../../utils/User";
+
 
 const RegisterForm = () => {
+
     const [data, setData] = useState(
         {
             name: '',
@@ -15,6 +19,7 @@ const RegisterForm = () => {
             password: '',
             repeatPassword: ''
         });
+
     const handleChange = ({target}) => {
         setData(prevState => (
             {
@@ -22,13 +27,20 @@ const RegisterForm = () => {
                 [target.name]: target.value
             }
         ))
-    }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addUserNew(data);
+    };
+
+
     return (
         <>
             <div className={style.header}>
                 <h1>Create an account</h1>
             </div>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={handleSubmit}>
                 <div className={style.form__wrapper}>
                     <InputForm
                         label='First Name'
