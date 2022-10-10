@@ -13,13 +13,15 @@
 aside, nav, footer, header, section, main {
   display: block;
 }
-
+body {
+  font-family: 'Inter', sans-serif;
+  color: #2B3844;
+}
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   font-size: inherit;
   font-weight: inherit;
 }
-
 ul, ul li {
   list-style: none;
 }
@@ -32,17 +34,6 @@ svg {
   max-width: 100%;
   height: auto;
 }
-input, textarea, button, select {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  background-color: transparent;
-}
-
-input::-ms-clear {
-  display: none;
-}
-
 
 input, textarea, button, select {
   font-family: inherit;
@@ -58,6 +49,7 @@ input::-ms-clear {
 button, input[type="submit"] {
   display: block;
   cursor: pointer;
+  line-height: inherit;
 }
 
 button::-moz-focus-inner {
@@ -67,17 +59,6 @@ button::-moz-focus-inner {
 
 label {
   cursor: pointer;
-}
-fieldset{
-border: none;
-margin: 0;
-padding: 0;
-}
-legend {
-  margin: 0;
-  padding: 0;
-  border: none;
-  display: block;
 }
 img {
   display: block;

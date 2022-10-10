@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {addUser} from '../../utils/User';
 import style from './Login.module.scss'
-import {useEffect} from "react";
-import {addUser} from "../../utils/User";
 
 const Login = ({children}) => {
     useEffect(() => {
@@ -10,9 +9,9 @@ const Login = ({children}) => {
 
     return (
         <div className={style.login__wrapper}>
-            <div className={style.login}>
+            <section className={style.login}>
                 {children}
-            </div>
+            </section>
         </div>
     );
 };

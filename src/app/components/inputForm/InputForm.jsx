@@ -5,6 +5,7 @@ const InputForm = (
         label,
         type = 'text',
         name,
+        placeholder,
         value,
         onChange,
         onBlur,
@@ -14,19 +15,19 @@ const InputForm = (
 ) => {
     return (
         <div className={style.input__wrapper}>
-            <label className={style.label} htmlFor={name}>{label}</label>
-                <input
-                    className={style.input}
-                    type={type}
-                    name={name}
-                    value={value}
-                    placeholder={label}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                />
+            <label className={style.input__label} htmlFor={name}>{label}</label>
+            <input
+                className={style.input}
+                type={type}
+                name={name}
+                value={value}
+                placeholder={placeholder || label}
+                onChange={onChange}
+                onBlur={onBlur}
+            />
             {touched && errors && (
                 <div className={style.input__error}>
-                    {errors}
+                    <p>{errors}</p>
                 </div>
             )}
         </div>

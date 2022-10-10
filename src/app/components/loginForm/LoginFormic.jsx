@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import InputForm from "../inputForm/InputForm";
 import {existenceCheckUser} from "../../utils/User";
 
-import style from "./LoginForm.module.scss";
+import style from '../login/Login.module.scss'
 
 
 const SignupSchema = Yup.object().shape({
@@ -41,9 +41,9 @@ const RegisterForm = () => {
     }
     return (
         <>
-            <div className={style.header}>
+            <header className={style.login__header}>
                 <h1>Sign in</h1>
-            </div>
+            </header>
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
@@ -70,6 +70,7 @@ const RegisterForm = () => {
                         label='Password'
                         type='password'
                         name='password'
+                        placeholder='Enter password'
                         value={values.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -85,7 +86,7 @@ const RegisterForm = () => {
             )}
             </Formik>
             <p>Dont have account ?
-                <Link className={style.link} to='/register'> Sign up</Link>
+                <Link className={style.login__link} to='/register'> Sign up</Link>
             </p>
         </>
     )

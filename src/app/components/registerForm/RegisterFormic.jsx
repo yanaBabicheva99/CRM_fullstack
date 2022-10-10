@@ -1,17 +1,17 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 
-import InputForm from "../inputForm/InputForm";
+import InputForm from '../inputForm/InputForm';
 import {addUserNew} from "../../utils/User";
 
-import style from './RegisterForm.module.scss'
+import style from '../login/Login.module.scss';
 
 
 const SignupSchema = Yup.object().shape({
-     name: Yup.string()
+    name: Yup.string()
         .min(2, 'Name is too short!')
         .max(50, 'Name is too long!')
         .required('Name is required'),
@@ -44,7 +44,8 @@ const SignupSchema = Yup.object().shape({
             /(?=.{8,})/,
             'The password must consist of at least 8 symbols'
         ),
-        repeatPassword: Yup.string()
+    repeatPassword: Yup.string()
+        .required('Repeat password is required')
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
 });
 
@@ -60,90 +61,91 @@ const RegisterForm = () => {
     }
     return (
         <>
-            <div className={style.header}>
+            <header className={style.login__header}>
                 <h1>Create an account</h1>
-            </div>
+            </header>
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
                 onSubmit={addUserNew}
             >{({
-             values,
-             errors,
-             touched,
-             handleChange,
-             handleBlur,
-             handleSubmit,
+                   values,
+                   errors,
+                   touched,
+                   handleChange,
+                   handleBlur,
+                   handleSubmit,
                }) => (
-            <form className={style.form} onSubmit={handleSubmit}>
-                <div className={style.form__wrapper}>
+                <form className={style.form} onSubmit={handleSubmit}>
+                    <div className={style.form__wrapper}>
+                        <InputForm
+                            label='First Name'
+                            name='name'
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            touched={touched.name}
+                            errors={errors.name}
+                        />
+                        <InputForm
+                            label='Last name'
+                            name='lastName'
+                            value={values.lastName}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            touched={touched.lastName}
+                            errors={errors.lastName}
+                        />
+                    </div>
                     <InputForm
-                        label='First Name'
-                        name='name'
-                        value={values.name}
+                        label='Company name'
+                        name='companyName'
+                        value={values.companyName}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        touched={touched.name}
-                        errors={errors.name}
+                        touched={touched.companyName}
+                        errors={errors.companyName}
                     />
                     <InputForm
-                        label='Last name'
-                        name='lastName'
-                        value={values.lastName}
+                        label='Email'
+                        name='email'
+                        value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        touched={touched.lastName}
-                        errors={errors.lastName}
+                        touched={touched.email}
+                        errors={errors.email}
                     />
-                </div>
-                <InputForm
-                    label='Company name'
-                    name='companyName'
-                    value={values.companyName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    touched={touched.companyName}
-                    errors={errors.companyName}
-                />
-                <InputForm
-                    label='Email'
-                    name='email'
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    touched={touched.email}
-                    errors={errors.email}
-                />
-                <InputForm
-                    label='Password'
-                    type='password'
-                    name='password'
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    touched={touched.password}
-                    errors={errors.password}
-                />
-                <InputForm
-                    label='Repeat password'
-                    type='password'
-                    name='repeatPassword'
-                    value={values.repeatPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    touched={touched.repeatPassword}
-                    errors={errors.repeatPassword}
-                />
-                <button
-                    className={style.form__btn}
-                >
-                    Create account
-                </button>
-            </form>
+                    <InputForm
+                        label='Password'
+                        type='password'
+                        name='password'
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.password}
+                        errors={errors.password}
+                    />
+                    <InputForm
+                        label='Repeat password'
+                        type='password'
+                        name='repeatPassword'
+                        value={values.repeatPassword}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        touched={touched.repeatPassword}
+                        errors={errors.repeatPassword}
+                    />
+                    <button
+                        className={style.form__btn}
+                        type='submit'
+                    >
+                        Create account
+                    </button>
+                </form>
             )}
             </Formik>
             <p>Already have an account ?
-                <Link className={style.link} to='/login'> Log in</Link>
+                <Link className={style.login__link} to='/login'> Log in</Link>
             </p>
         </>
     )

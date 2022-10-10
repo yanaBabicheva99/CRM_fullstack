@@ -8,8 +8,8 @@
   padding-right: 16px;
 
   color: #000;
-  font-weight: 400;
   font-size: 14px;
+  outline-color: #5382E7;
 
   &::placeholder {
     color: #2B3844;
@@ -18,22 +18,23 @@
 
   &__wrapper {
     margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
-
     font-size: 12px;
-    font-weight: 400;
+  }
+
+  &__label {
+    margin-bottom: 8px;
+    display: block;
   }
 
   &__error {
-    margin-top: -7px;
+    padding-top: 2px;
     color: red;
+
+    p {
+      font-size: 12px;
+      font-weight: inherit;
+      text-align: left;
+    }
   }
 
-}
-
-.label {
-  line-height: 1;
-  color: #2B3844;
 }
