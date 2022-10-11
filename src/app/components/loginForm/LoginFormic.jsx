@@ -41,9 +41,6 @@ const RegisterForm = () => {
     }
     return (
         <>
-            <header className={style.login__header}>
-                <h1>Sign in</h1>
-            </header>
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}

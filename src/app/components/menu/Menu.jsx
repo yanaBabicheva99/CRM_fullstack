@@ -1,5 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+
+import {Routes} from "../../constants";
 import {ReactComponent as IconHome } from "../../assets/img/menu/home.svg";
 import {ReactComponent as IconProduct} from "../../assets/img/menu/product.svg";
 import {ReactComponent as IconUser} from "../../assets/img/menu/user.svg";
@@ -7,6 +9,7 @@ import {ReactComponent as IconSales} from "../../assets/img/menu/sales.svg";
 import {ReactComponent as IconLogo} from "../../assets/img/menu/log.svg";
 import logoJustice from '../../assets/img/menu/justice.png';
 import logoCrm from '../../assets/img/menu/crm.svg';
+
 import style from './Menu.module.scss';
 
 
@@ -15,10 +18,10 @@ const rootClasses = (isActive) => {
     return isActive ? style.menu__nav_item__active : style.menu__nav_item;
 }
 const nav = [
-    {pageName: 'Main page', path: '/', icon: <IconHome />},
-    {pageName: 'My Products', path: '/products', icon: <IconProduct />},
-    {pageName: 'My sales', path: '/sales', icon: <IconSales />},
-    {pageName: 'Personal Cabinet', path: '/personal', icon: <IconUser />},
+    {pageName: 'Main page', path: Routes.MAIN, icon: <IconHome />},
+    {pageName: 'My Products', path: Routes.PRODUCTS, icon: <IconProduct />},
+    {pageName: 'My sales', path: Routes.SALES, icon: <IconSales />},
+    {pageName: 'Personal Cabinet', path: Routes.PERSONAL, icon: <IconUser />},
 ]
 const Menu = () => {
     return (
@@ -32,7 +35,6 @@ const Menu = () => {
                 </div>
             </header>
             <nav className={style.menu__nav}>
-                <ul>
                     {nav.map(item => (
                         <NavLink
                             key={item.pageName}
@@ -44,7 +46,6 @@ const Menu = () => {
                             <span>{item.pageName}</span>
                         </NavLink>
                     ))}
-                </ul>
             </nav>
             <NavLink className={style.menu__logo_out} to='/login'>
                     <IconLogo/>

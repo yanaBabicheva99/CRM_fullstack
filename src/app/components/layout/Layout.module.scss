@@ -39,11 +39,17 @@
 
     border-radius: 3px;
     color: #fff;
+    transition: background-color 0.3s ease-in;
 
     span {
       font-weight: 500;
       font-size: 14px;
     }
+
+    &:hover {
+      background-color: #2B3844;
+    }
+
   }
 
   &__page {

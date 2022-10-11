@@ -59,6 +59,14 @@
       text-decoration: none;
       color: #5382E7;
 
+      transition:
+              background-color 0.3s ease-in,
+              color 0.3s ease-in,
+              border-right 0.2s ease-in,
+              stroke 0.3s ease-in,
+              opacity 0.3s ease-in
+     ;
+
         & * {
           stroke: #5382E7;
           opacity: 1
