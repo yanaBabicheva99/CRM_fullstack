@@ -5,9 +5,10 @@ import * as Yup from 'yup';
 
 
 import InputForm from "../inputForm/InputForm";
-import {existenceCheckUser} from "../../utils/User";
+import {existenceCheckUser} from "../../../utils/User";
 
-import style from '../login/Login.module.scss'
+import style from '../../login/Login.module.scss';
+import styleForm from '../form.module.scss';
 
 
 const SignupSchema = Yup.object().shape({
@@ -53,7 +54,7 @@ const RegisterForm = () => {
                    handleBlur,
                    handleSubmit,
                }) => (
-                <form className={style.form} onSubmit={handleSubmit}>
+                <form className={styleForm.form} onSubmit={handleSubmit}>
                     <InputForm
                         label='Email'
                         name='email'
@@ -75,7 +76,7 @@ const RegisterForm = () => {
                         errors={errors.password}
                     />
                     <button
-                        className={style.form__btn}
+                        className={styleForm.form__btn}
                     >
                         Log in
                     </button>

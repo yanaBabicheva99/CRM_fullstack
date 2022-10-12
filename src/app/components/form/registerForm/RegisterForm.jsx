@@ -5,23 +5,24 @@ import * as Yup from 'yup';
 
 
 import InputForm from '../inputForm/InputForm';
-import {addUserNew} from "../../utils/User";
+import {addUserNew} from "../../../utils/User";
 
-import style from '../login/Login.module.scss';
+import style from '../../login/Login.module.scss';
+import styleForm from '../form.module.scss';
 
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, 'Name is too short!')
-        .max(50, 'Name is too long!')
+        .max(10, 'Name is too long!')
         .required('Name is required'),
     lastName: Yup.string()
         .min(2, 'Last name is too short!')
-        .max(50, 'Last name is too long!')
+        .max(10, 'Last name is too long!')
         .required('Last name is required'),
     companyName: Yup.string()
         .min(2, 'Company name is too short!')
-        .max(50, 'Company name is too long!')
+        .max(10, 'Company name is too long!')
         .required('Company name is required'),
 
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -73,8 +74,8 @@ const RegisterForm = () => {
                    handleBlur,
                    handleSubmit,
                }) => (
-                <form className={style.form} onSubmit={handleSubmit}>
-                    <div className={style.form__wrapper}>
+                <form className={styleForm.form} onSubmit={handleSubmit}>
+                    <div className={styleForm.form__wrapper}>
                         <InputForm
                             label='First Name'
                             name='name'
@@ -133,7 +134,7 @@ const RegisterForm = () => {
                         errors={errors.repeatPassword}
                     />
                     <button
-                        className={style.form__btn}
+                        className={styleForm.form__btn}
                         type='submit'
                     >
                         Create account

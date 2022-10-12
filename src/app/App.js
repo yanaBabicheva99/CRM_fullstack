@@ -2,8 +2,8 @@ import React from 'react';
 import {Route, Routes as Switch, useLocation} from 'react-router-dom';
 
 import Login from "./components/login/Login";
-import RegisterFormic from "./components/registerForm/RegisterFormic";
-import LoginFormic from "./components/loginForm/LoginFormic";
+import RegisterForm from "./components/form/registerForm/RegisterForm";
+import LoginForm from "./components/form/loginForm/LoginForm";
 import Layout from "./components/layout/Layout";
 import Main from "./components/pages/main/Main";
 import Products from "./components/pages/products/Products";
@@ -12,6 +12,7 @@ import Personal from "./components/pages/personal/Personal";
 
 import './style/index.module.scss';
 import { Routes } from './constants'
+import {ProductsProvider} from "./hooks/useProducts";
 
 function App() {
     const pages = [
@@ -45,47 +46,47 @@ function App() {
         {
             title: 'Sign in',
             path: Routes.LOGIN,
-            component: <LoginFormic />
+            component: <LoginForm />
         },
         {
             title: 'Create an account',
             path: Routes.REGISTER,
-            component: <RegisterFormic />
+            component: <RegisterForm />
         },
-    ]
-    const { pathname } = useLocation();
-    console.log(pathname);
+    ];
     return (
         <div className="App">
-            <Switch>
-                {
-                    pages.map(item => (
-                        <Route
-                            key={item.title}
-                            path={item.path}
-                            element={
-                                <Layout
-                                    title={item.title}
-                                    subtitle={item.subtitle}
-                                >
-                                    {item.component}
-                                </Layout>
-                        }/>
-                    ))
-                }
-                {
-                    loginPages.map(item => (
-                        <Route
-                            key={item.title}
-                            path={item.path}
-                            element={
-                            <Login title={item.title}>
-                                {item.component}
-                            </Login>
-                        }/>
-                    ))
-                }
-            </Switch>
+            <ProductsProvider>
+                <Switch>
+                    {
+                        pages.map(item => (
+                            <Route
+                                key={item.title}
+                                path={item.path}
+                                element={
+                                    <Layout
+                                        title={item.title}
+                                        subtitle={item.subtitle}
+                                    >
+                                        {item.component}
+                                    </Layout>
+                                }/>
+                        ))
+                    }
+                    {
+                        loginPages.map(item => (
+                            <Route
+                                key={item.title}
+                                path={item.path}
+                                element={
+                                    <Login title={item.title}>
+                                        {item.component}
+                                    </Login>
+                                }/>
+                        ))
+                    }
+                </Switch>
+            </ProductsProvider>
         </div>
     );
 }

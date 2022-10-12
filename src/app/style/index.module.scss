@@ -69,3 +69,6 @@ html {
   height: 100%;
   scroll-behavior: smooth;
 }
+table, th {
+  font-weight: inherit;
+}

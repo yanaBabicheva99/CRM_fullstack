@@ -12,6 +12,7 @@ const InputForm = (
         touched,
         errors
     }
+
 ) => {
     return (
         <div className={style.input__wrapper}>

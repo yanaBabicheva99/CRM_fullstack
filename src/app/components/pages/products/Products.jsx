@@ -1,8 +1,22 @@
 import React from 'react';
+import ProductsTable from "../../table/productsTable/ProductsTable";
+import {useProducts} from "../../../hooks/useProducts";
+
 
 const Products = () => {
+    const {products, loading, deleteProduct} = useProducts();
+
+    const handleDelete = (id) => {
+        deleteProduct(id);
+    };
+
+    console.log(products);
     return (
-     <h1>Products</h1>
+        <>
+            {!loading ?
+                <ProductsTable products={products} handleDelete={handleDelete} />
+                : <h2>Loading...</h2>}
+        </>
     );
 };
 
