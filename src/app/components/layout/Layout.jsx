@@ -1,12 +1,12 @@
 import React from 'react';
 
+import useModal from "../../hooks/useModal";
 import Menu from "../menu/Menu";
 import Modal from "../modal/Modal";
-import useModal from "../../hooks/useModal";
+import ProductFormAdd from "../form/productForm/ProductFormAdd";
 import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
 
 import style from './Layout.module.scss';
-import ProductFormAdd from "../form/productForm/ProductFormAdd";
 
 
 const Layout = ({children, title, subtitle}) => {
@@ -36,7 +36,7 @@ const Layout = ({children, title, subtitle}) => {
                 visible={visible}
                 handleVisible={handleVisible}
             >
-                <ProductFormAdd />
+                <ProductFormAdd handleVisible={handleVisible} />
             </Modal>
         </div>
     );

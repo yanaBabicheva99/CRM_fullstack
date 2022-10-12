@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
-import styleForm from "../form.module.scss";
+import styleForm from '../form.module.scss';
 
 const AddProductSchema = Yup.object().shape({
     store: Yup
@@ -57,11 +57,8 @@ const AddProductSchema = Yup.object().shape({
             /^[1-9]{1}[0-9]*$/,
             'Weight is incorrect'
         )
-})
-const add = (data) => {
-    console.log(data)
-}
-const ProductFormAdd = () => {
+});
+const ProductFormAdd = ({handleVisible}) => {
     const initialValues = {
         store: '',
         price: '',
@@ -69,7 +66,13 @@ const ProductFormAdd = () => {
         category: '',
         quantity: '',
         weight: ''
-    }
+    };
+
+    const add = (data) => {
+        console.log(data);
+        handleVisible();
+    };
+
     return (
         <>
             <header className={style.modal__header}>

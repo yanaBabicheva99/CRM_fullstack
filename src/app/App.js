@@ -57,35 +57,35 @@ function App() {
     return (
         <div className="App">
             <ProductsProvider>
-                <Switch>
-                    {
-                        pages.map(item => (
-                            <Route
-                                key={item.title}
-                                path={item.path}
-                                element={
-                                    <Layout
-                                        title={item.title}
-                                        subtitle={item.subtitle}
-                                    >
-                                        {item.component}
-                                    </Layout>
-                                }/>
-                        ))
-                    }
-                    {
-                        loginPages.map(item => (
-                            <Route
-                                key={item.title}
-                                path={item.path}
-                                element={
-                                    <Login title={item.title}>
-                                        {item.component}
-                                    </Login>
-                                }/>
-                        ))
-                    }
-                </Switch>
+                    <Switch>
+                        {
+                            pages.map(item => (
+                                <Route
+                                    key={item.title}
+                                    path={item.path}
+                                    element={
+                                        <Layout
+                                            title={item.title}
+                                            subtitle={item.subtitle}
+                                        >
+                                            {item.component}
+                                        </Layout>
+                                    }/>
+                            ))
+                        }
+                        {
+                            loginPages.map(item => (
+                                <Route
+                                    key={item.title}
+                                    path={item.path}
+                                    element={
+                                        <Login title={item.title}>
+                                            {item.component}
+                                        </Login>
+                                    }/>
+                            ))
+                        }
+                    </Switch>
             </ProductsProvider>
         </div>
     );

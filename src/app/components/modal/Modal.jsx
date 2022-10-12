@@ -7,10 +7,11 @@ import style from './Modal.module.scss';
 const Modal = ({children, visible, handleVisible}) => {
     const rootClasses = () => {
         return visible ? [style.modal, style.active].join(' ') : style.modal;
-    }
+    };
+
     return (
-        <div className={rootClasses()}>
-            <div className={style.modal__content}>
+        <div className={rootClasses()} onClick={() => handleVisible()}>
+            <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
                 {children}
                 <button
                     className={style.modal__btn}

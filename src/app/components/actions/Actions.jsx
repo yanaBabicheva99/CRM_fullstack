@@ -4,7 +4,7 @@ import {ReactComponent as IconEdit} from '../../assets/img/action/edit.svg';
 import {ReactComponent as IconDelete} from '../../assets/img/action/delete.svg';
 
 const Actions = ({element, handleDelete}) => {
-    console.log(element)
+    console.log('element', element);
     return (
         <div className={style.actions}>
             <button className={style.action}>
