@@ -10,6 +10,7 @@ import Products from "./components/pages/products/Products";
 import Sales from "./components/pages/sales/Sales";
 import Personal from "./components/pages/personal/Personal";
 
+
 import './style/index.module.scss';
 import { Routes } from './constants'
 import {ProductsProvider} from "./hooks/useProducts";

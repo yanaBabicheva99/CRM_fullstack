@@ -26,7 +26,8 @@ const AddProductSchema = Yup.object().shape({
             'Number of products is incorrect'
         ),
 });
-const SellForm = ({handleVisible}) => {
+const SellForm = ({handleVisible, quantity}) => {
+    console.log(typeof quantity)
 
     const initialValues = {
         quantity: '',

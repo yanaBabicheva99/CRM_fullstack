@@ -23,5 +23,4 @@ const Modal = ({children, visible, handleVisible}) => {
         </div>
     );
 };
-
 export default Modal;
