@@ -1,16 +1,17 @@
 import React from 'react';
 
-import useModal from "../../hooks/useModal";
+
 import Menu from "../menu/Menu";
 import Modal from "../modal/Modal";
 import ProductFormAdd from "../form/productForm/ProductFormAdd";
 import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
 
 import style from './Layout.module.scss';
+import {useModal} from "../../hooks/useModal";
 
 
 const Layout = ({children, title, subtitle}) => {
-    const {visible, handleVisible} = useModal();
+    const {visible: create, handleVisible: handleVisibleCreate} = useModal();
     return (
         <div className={style.layout__wrapper}>
             <Menu/>
@@ -22,7 +23,7 @@ const Layout = ({children, title, subtitle}) => {
                     </div>
                     <button
                         className={style.layout__btn}
-                        onClick={handleVisible}
+                        onClick={handleVisibleCreate}
                     >
                         <IconBtn className={style.layout__btn_add}/>
                         <span>Create a product</span>
@@ -33,10 +34,10 @@ const Layout = ({children, title, subtitle}) => {
                 </section>
             </div>
             <Modal
-                visible={visible}
-                handleVisible={handleVisible}
+                visible={create}
+                handleVisible={handleVisibleCreate}
             >
-                <ProductFormAdd handleVisible={handleVisible} />
+                <ProductFormAdd handleVisible={handleVisibleCreate} />
             </Modal>
         </div>
     );

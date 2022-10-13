@@ -1,6 +1,6 @@
 export const getData = () => {
     const dateNow = new Date();
-    let day = dateNow.getDay();
+    let day = dateNow.getDate();
     let month = dateNow.getMonth() + 1;
     const year = dateNow.getFullYear();
     if (day < 10) {
@@ -18,44 +18,7 @@ export const getPrice = (price) => {
 export const getWeight = (weight) => {
     return weight + 'kg'
 };
-const products = [
-    {
-        id: 1,
-        productName: 'Sneakers',
-        store: 'Adidas',
-        address: '15 Krylatskaya',
-        category: 'Sportswear',
-        creationData: '',
-        price: '1000',
-        remains: '40',
-        weight: '5',
-        actions: 'component'
-    },
-    {
-        id: 2,
-        productName: 'Sneakers',
-        store: 'Nike',
-        address: '15 Krylatskaya',
-        category: 'Sportswear',
-        creationData: '',
-        price: '1000',
-        remains: '40',
-        weight: '5',
-        actions: 'component'
-    },
-    {
-        id: 3,
-        productName: 'Sneakers',
-        store: 'Puma',
-        address: '15 Krylatskaya',
-        category: 'Sportswear',
-        creationData: '',
-        price: '1000',
-        remains: '40',
-        weight: '5',
-        actions: 'component'
-    },
-]
+const products = [];
 export const getProducts = () => {
     if (!localStorage.getItem('products')) {
         localStorage.setItem('products', JSON.stringify(products))

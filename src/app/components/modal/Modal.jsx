@@ -10,12 +10,12 @@ const Modal = ({children, visible, handleVisible}) => {
     };
 
     return (
-        <div className={rootClasses()} onClick={() => handleVisible()}>
+        <div className={rootClasses()} onClick={handleVisible}>
             <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
                 {children}
                 <button
                     className={style.modal__btn}
-                    onClick={() => handleVisible()}
+                    onClick={handleVisible}
                 >
                     <IconClose className={style.modal__btn_close}/>
                 </button>

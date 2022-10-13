@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {getProducts} from "../utils/Products";
+import {getData, getProducts} from "../utils/Products";
 
 const ProductsContext = React.createContext();
 
@@ -19,18 +19,45 @@ export const ProductsProvider = ({children}) => {
     }, []);
 
     const deleteProduct = (id) => {
-        const products = JSON.parse(localStorage.getItem('products'));
         const updateProducts = products.filter(product => product.id !== id);
         localStorage.setItem('products', JSON.stringify(updateProducts));
         setProducts(updateProducts);
     }
 
     const addProduct = (data) => {
-        console.log(data);
-
+        const updateProducts = [...products,  {
+            id: Date.now(),
+            ...data,
+            address: '15 Krylatskaya',
+            creationData: getData(),
+        }];
+        localStorage.setItem('products', JSON.stringify(updateProducts));
+        setProducts(updateProducts);
     }
 
-    return <ProductsContext.Provider value={{products, loading, deleteProduct}}>
+    const changeProduct = (data) => {
+          const updateProducts = products.map(product => {
+              if (product.id === data.id) {
+                  return {
+                      ...data,
+                      address: '15 Krylatskaya',
+                      creationData: product.creationData,
+                  };
+              }
+              return product;
+          });
+        localStorage.setItem('products', JSON.stringify(updateProducts));
+        setProducts(updateProducts);
+    }
+
+    return <ProductsContext.Provider value={
+        {   products,
+            loading,
+            deleteProduct,
+            addProduct,
+            changeProduct
+        }
+    }>
         {children}
     </ProductsContext.Provider>
 }

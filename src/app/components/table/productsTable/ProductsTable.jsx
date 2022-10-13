@@ -1,10 +1,10 @@
 import React from 'react';
-import {getData, getPrice, getWeight} from "../../../utils/Products";
+import {getPrice, getWeight} from "../../../utils/Products";
 import Actions from "../../actions/Actions";
 import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
 
-const ProductsTable = ({products, handleDelete}) => {
+const ProductsTable = ({products, handleDelete, onCurrentProduct, onVisibleEdit}) => {
 const columns = {
     productName: {
         path: 'productName',
@@ -25,7 +25,6 @@ const columns = {
     creationData: {
         path: 'creationData',
         name: 'Creation date',
-        component: () => getData()
     },
     price: {
         path: 'price',
@@ -48,6 +47,8 @@ const columns = {
             <Actions
                 element={product}
                 handleDelete={handleDelete}
+                onCurrentProduct={onCurrentProduct}
+                onVisibleEdit={onVisibleEdit}
             />
         )
     }
@@ -55,7 +56,7 @@ const columns = {
     return(
         <table>
            <TableHeader columns={columns} />
-           <TableBody columns={columns} items={products} />
+           <TableBody columns={columns} items={products}/>
         </table>
     );
 };

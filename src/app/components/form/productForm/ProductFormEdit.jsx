@@ -59,48 +59,36 @@ const AddProductSchema = Yup.object().shape({
             'Weight is incorrect'
         )
 });
-const ProductFormAdd = ({handleVisible}) => {
-    const {addProduct} = useProducts();
-    const initialValues = {
-        store: '',
-        price: '',
-        productName: '',
-        category: '',
-        remains: '',
-        weight: ''
-    };
+const ProductFormEdit = ({handleVisible, data}) => {
+    const {id, address, creationData, ...dataProduct} = data;
 
-    const add = (data) => {
-        addProduct(data);
+    const {changeProduct} = useProducts();
+    const initialValues = dataProduct;
+
+    const Edit = (data) => {
+        changeProduct({id, ...data});
         handleVisible();
     };
-
-    // const clearForm = () => {
-    //     resetForm({values: ''})
-    // }
-
-
-
-
     return (
         <>
             <header className={style.modal__header}>
                 <h2 className={style.modal__title}>
-                    Creating a product
+                    Editing a product
                 </h2>
             </header>
             <Formik
                 initialValues={initialValues}
+                enableReinitialize
                 validationSchema={AddProductSchema}
-                onSubmit={add}
+                onSubmit={Edit}
             >
                 {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit
                   }) => (
                     <form className={styleForm.form} onSubmit={handleSubmit}>
                         <InputForm
@@ -162,7 +150,7 @@ const ProductFormAdd = ({handleVisible}) => {
                         <button
                             className={[styleForm.form__btn, styleForm.add].join(' ')}
                         >
-                            Add Product
+                            Save changes
                         </button>
                     </form>
                 )}
@@ -170,5 +158,4 @@ const ProductFormAdd = ({handleVisible}) => {
         </>
     );
 };
-
-export default ProductFormAdd;
+export default ProductFormEdit;
