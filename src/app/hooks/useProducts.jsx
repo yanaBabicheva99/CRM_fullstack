@@ -50,12 +50,34 @@ export const ProductsProvider = ({children}) => {
         setProducts(updateProducts);
     }
 
+    const updateProduct = (id, quantity) => {
+        const product = products.find(product => +product.id === id);
+        const updateProduct = {...product,  remains: product.remains - quantity};
+
+        if (updateProduct.remains === 0) {
+            deleteProduct(updateProduct.id);
+            return product;
+        }
+
+         const updateProducts = products.map(product => {
+             if (+product.id === id) {
+                 return updateProduct;
+             }
+             return product;
+         });
+
+        localStorage.setItem('products', JSON.stringify(updateProducts));
+        setProducts(updateProducts);
+        return product;
+    }
+
     return <ProductsContext.Provider value={
         {   products,
             loading,
             deleteProduct,
             addProduct,
-            changeProduct
+            changeProduct,
+            updateProduct
         }
     }>
         {children}

@@ -24,6 +24,7 @@ const Main = () => {
                 >
                     {id !== null && (
                     <SellForm
+                        id={id}
                         quantity={remains}
                         handleVisible={() => setOpen({open: false})}
                     />)}

@@ -15,6 +15,7 @@ import './style/index.module.scss';
 import { Routes } from './constants'
 import {ProductsProvider} from "./hooks/useProducts";
 import {ModalContextAction} from "./context/ModalContextAction";
+import {SellProvider} from "./hooks/useSellProducts";
 
 function App() {
     const [visible, setVisible] = useState({});
@@ -63,6 +64,7 @@ function App() {
             <ModalContextAction.Provider value={[open, setOpen]}>
         <div className="App">
             <ProductsProvider>
+                <SellProvider>
                     <Switch>
                         {
                             pages.map(item => (
@@ -92,6 +94,7 @@ function App() {
                             ))
                         }
                     </Switch>
+                </SellProvider>
             </ProductsProvider>
         </div>
             </ModalContextAction.Provider>

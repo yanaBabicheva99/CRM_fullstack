@@ -3,21 +3,26 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
 import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
+import {useSellProducts} from "../../../hooks/useSellProducts";
+import {useProducts} from "../../../hooks/useProducts";
 
-const SellForm = ({handleVisible, quantity}) => {
+const SellForm = ({handleVisible, quantity, id}) => {
+    const {addSellProduct} = useSellProducts();
+    const {updateProduct} = useProducts()
 
     const AddProductSchema = Yup.object().shape({
         quantity: Yup
             .string()
-            .test('len', 'Number of products is incorrect', val => val === quantity || val < quantity)
+            .test('Number of products is incorrect', 'Number of products is incorrect', val => {
+                if(val) return Number(val) <= Number(quantity)
+            } )
             .required('Number of products is required')
             .matches(
                 /^(0|[1-9]\d*)$/,
@@ -30,18 +35,27 @@ const SellForm = ({handleVisible, quantity}) => {
 
 
     });
-    console.log(typeof quantity)
+
+    const options = [
+        {value: 'Mon', label: 'Monday'},
+        {value: 'Tue', label: 'Tuesday'},
+        {value: 'Wed', label: 'Wednesday'},
+        {value: 'Thu', label: 'Thursday'},
+        {value: 'Fri', label: 'Friday'},
+        {value: 'Sat', label: 'Saturday'},
+        {value: 'Sun', label: 'Sunday'},
+    ];
 
     const initialValues = {
         quantity,
         day: 'Mon'
     };
 
-    const sell = (data) => {
-        console.log(data);
+    const sell = ({quantity, day}) => {
+       const data = updateProduct(id, quantity);
+        addSellProduct(data, quantity, day)
         handleVisible();
     };
-
 
     return (
         <>
@@ -53,6 +67,7 @@ const SellForm = ({handleVisible, quantity}) => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={AddProductSchema}
+                enableReinitialize={true}
                 onSubmit={sell}
             >
                 {({
@@ -85,19 +100,22 @@ const SellForm = ({handleVisible, quantity}) => {
                                 autoWidth
                                 label='Day'
                             >
-                                <MenuItem value='Mon'>Monday</MenuItem>
-                                <MenuItem value='Tue'>Tuesday</MenuItem>
-                                <MenuItem value='Wed'>Wednesday</MenuItem>
-                                <MenuItem value='Thu'>Thursday</MenuItem>
-                                <MenuItem value='Fri'>Friday</MenuItem>
-                                <MenuItem value='Sat'>Saturday</MenuItem>
-                                <MenuItem value='Sun'>Sunday</MenuItem>
+                                {
+                                    options.map(option => (
+                                        <MenuItem
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </MenuItem>
+                                    ))
+                                }
                             </Select>
                         </FormControl>
                         <button
                             className={[styleForm.form__btn, styleForm.add].join(' ')}
                         >
-                            Add Product
+                            Sell product
                         </button>
                     </form>
                 )}

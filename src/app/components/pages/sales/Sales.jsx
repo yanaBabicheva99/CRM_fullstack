@@ -1,8 +1,15 @@
 import React from 'react';
+import SalesTable from "../../table/salesTable/SalesTable";
+import {useSellProducts} from "../../../hooks/useSellProducts";
 
 const Sales = () => {
+    const {sellProducts} = useSellProducts();
     return (
-      <h1>Sales</h1>
+      <>
+          <SalesTable
+              sellProducts={sellProducts}
+          />
+      </>
     );
 };
 
