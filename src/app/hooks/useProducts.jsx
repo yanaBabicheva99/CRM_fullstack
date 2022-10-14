@@ -36,6 +36,7 @@ export const ProductsProvider = ({children}) => {
     }
 
     const changeProduct = (data) => {
+        console.log('change', data);
           const updateProducts = products.map(product => {
               if (product.id === data.id) {
                   return {
@@ -51,8 +52,11 @@ export const ProductsProvider = ({children}) => {
     }
 
     const updateProduct = (id, quantity) => {
-        const product = products.find(product => +product.id === id);
-        const updateProduct = {...product,  remains: product.remains - quantity};
+        const product = products.find(product => product.id === id);
+        const updateProduct = {
+            ...product,
+            remains: Number(product.remains) - Number(quantity)
+        };
 
         if (updateProduct.remains === 0) {
             deleteProduct(updateProduct.id);
@@ -60,7 +64,7 @@ export const ProductsProvider = ({children}) => {
         }
 
          const updateProducts = products.map(product => {
-             if (+product.id === id) {
+             if (product.id === id) {
                  return updateProduct;
              }
              return product;

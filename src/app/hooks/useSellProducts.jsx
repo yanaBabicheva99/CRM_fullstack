@@ -30,6 +30,7 @@ export const SellProvider = ({children}) => {
             {
                 ...sellData,
                 quantity,
+                day,
                 lastSale: getData()
             }
         ];

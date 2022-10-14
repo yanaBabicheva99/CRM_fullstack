@@ -15,7 +15,7 @@ import {useProducts} from "../../../hooks/useProducts";
 
 const SellForm = ({handleVisible, quantity, id}) => {
     const {addSellProduct} = useSellProducts();
-    const {updateProduct} = useProducts()
+    const {updateProduct} = useProducts();
 
     const AddProductSchema = Yup.object().shape({
         quantity: Yup

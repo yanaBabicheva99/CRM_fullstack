@@ -67,7 +67,8 @@ const ProductFormEdit = ({handleVisible, data}) => {
     const initialValues = dataProduct;
 
     const Edit = (data) => {
-        changeProduct({id, ...data});
+        const updateData = {...data, remains: Number(data.remains)}
+        changeProduct({id, ...updateData});
         handleVisible();
     };
     return (

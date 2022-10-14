@@ -71,7 +71,8 @@ const ProductFormAdd = ({handleVisible}) => {
     };
 
     const add = (data) => {
-        addProduct(data);
+        const updateData = {...data, remains: Number(data.remains)}
+        addProduct(updateData);
         handleVisible();
     };
 
