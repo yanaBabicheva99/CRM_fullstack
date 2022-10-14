@@ -24,7 +24,7 @@ export const SellProvider = ({children}) => {
         const sellProduct = sellProducts.find(product => product.id === sellData.id);
 
         if (sellProduct !== undefined) {
-           return updateProduct(sellProduct, quantity);
+           return updateSellProduct(sellProduct, quantity);
         }
         const updateSellProducts = [...sellProducts,
             {
@@ -38,11 +38,11 @@ export const SellProvider = ({children}) => {
         setSellProducts(updateSellProducts);
     }
 
-    const updateProduct = (sellProduct, items) => {
+    const updateSellProduct = (sellProduct, items) => {
 
         const updateSellProduct = {
             ...sellProduct,
-            quantity: Number(sellProduct.quantity) + Number(items)
+            quantity: sellProduct.quantity + items
         };
         const updateSellProducts = sellProducts.map(product => {
             if (product.id === sellProduct.id) {

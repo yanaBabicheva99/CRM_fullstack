@@ -52,8 +52,9 @@ const SellForm = ({handleVisible, quantity, id}) => {
     };
 
     const sell = ({quantity, day}) => {
-       const data = updateProduct(id, quantity);
-        addSellProduct(data, quantity, day)
+        const updateQuantity = Number(quantity);
+        const data = updateProduct(id, updateQuantity);
+        addSellProduct(data,updateQuantity, day)
         handleVisible();
     };
 

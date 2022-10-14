@@ -55,7 +55,7 @@ export const ProductsProvider = ({children}) => {
         const product = products.find(product => product.id === id);
         const updateProduct = {
             ...product,
-            remains: Number(product.remains) - Number(quantity)
+            remains: product.remains - quantity
         };
 
         if (updateProduct.remains === 0) {
