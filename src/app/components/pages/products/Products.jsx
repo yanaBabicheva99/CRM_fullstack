@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import ProductsTable from "../../table/productsTable/ProductsTable";
 import {useProducts} from "../../../hooks/useProducts";
 import Modal from "../../modal/Modal";
-import {useModal} from "../../../hooks/useModal";
 import ProductFormEdit from "../../form/productForm/ProductFormEdit";
+import {useModalContextAction} from "../../../hooks/useModalContextAction";
 
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
     const {products, loading, deleteProduct} = useProducts();
-    const {visible: edit, handleVisible: handleVisibleEdit} = useModal();
+    const [open, setOpen] = useModalContextAction();
 
     const handleDelete = (id) => {
         deleteProduct(id);
@@ -28,16 +28,16 @@ const Products = () => {
                    products={products}
                    handleDelete={handleDelete}
                    onCurrentProduct={handleCurrentProduct}
-                   onVisibleEdit={handleVisibleEdit}
+                   onVisibleEdit={() => setOpen({open: true})}
                />
                <Modal
-                   visible={edit}
-                   handleVisible={handleVisibleEdit}
+                   visible={open.open}
+                   handleVisible={() => setOpen({open: false})}
                >
                    {currentProduct && (
                        <ProductFormEdit
                            data={currentProduct}
-                           handleVisible={handleVisibleEdit}
+                           handleVisible={() => setOpen({open: false})}
                        />)
                    }
                </Modal>

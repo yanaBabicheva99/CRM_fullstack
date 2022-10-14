@@ -12,36 +12,34 @@ import InputForm from "../inputForm/InputForm";
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
 
-
-const AddProductSchema = Yup.object().shape({
-    quantity: Yup
-        .string()
-        .required('Number of products is required')
-        .matches(
-            /^(0|[1-9]\d*)$/,
-            'Number of products is incorrect'
-        )
-        .matches(
-            /^[1-9]{1}[0-9]*$/,
-            'Number of products is incorrect'
-        ),
-});
 const SellForm = ({handleVisible, quantity}) => {
+
+    const AddProductSchema = Yup.object().shape({
+        quantity: Yup
+            .string()
+            .test('len', 'Number of products is incorrect', val => val === quantity || val < quantity)
+            .required('Number of products is required')
+            .matches(
+                /^(0|[1-9]\d*)$/,
+                'Number of products is incorrect'
+            )
+            .matches(
+                /^[1-9]{1}[0-9]*$/,
+                'Number of products is incorrect'
+            ),
+
+
+    });
     console.log(typeof quantity)
 
     const initialValues = {
-        quantity: '',
+        quantity,
         day: 'Mon'
     };
 
-    // const handleChange = ({target}) => {
-    //     setFieldValue(target.name, target.value);
-    // };
-
-
     const sell = (data) => {
         console.log(data);
-        // handleVisible();
+        handleVisible();
     };
 
 

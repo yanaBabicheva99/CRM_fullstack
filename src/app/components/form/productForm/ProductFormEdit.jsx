@@ -60,6 +60,7 @@ const AddProductSchema = Yup.object().shape({
         )
 });
 const ProductFormEdit = ({handleVisible, data}) => {
+    console.log('current', data);
     const {id, address, creationData, ...dataProduct} = data;
 
     const {changeProduct} = useProducts();
@@ -78,7 +79,7 @@ const ProductFormEdit = ({handleVisible, data}) => {
             </header>
             <Formik
                 initialValues={initialValues}
-                enableReinitialize
+                enableReinitialize={true}
                 validationSchema={AddProductSchema}
                 onSubmit={Edit}
             >
