@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -36,16 +36,23 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
     const initialValues = {
         email: '',
         password: '',
-    }
+    };
+
+    const logIn = (data) => {
+       const isAuth = existenceCheckUser(data);
+       if (isAuth) navigate('/');
+    };
+
     return (
         <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
-                onSubmit={existenceCheckUser}
+                onSubmit={logIn}
             >{({
                    values,
                    errors,

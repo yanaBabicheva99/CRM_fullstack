@@ -24,15 +24,6 @@ export const getWeight = (weight) => {
     return weight + 'kg'
 };
 
-const products = [];
-export const getProducts = () => {
-    if (!localStorage.getItem('products')) {
-        localStorage.setItem('products', JSON.stringify(products))
-    }
-    return JSON.parse(localStorage.getItem('products'));
-}
-
-
 export function getPrice(amount) {
     const offset = 3;
     const price = amount.toString();
@@ -59,6 +50,15 @@ export function getPrice(amount) {
     } else {
         return  '$' + price
     }
+}
+
+
+const products = [];
+export const getProducts = () => {
+    if (!localStorage.getItem('products')) {
+        localStorage.setItem('products', JSON.stringify(products))
+    }
+    return JSON.parse(localStorage.getItem('products'));
 }
 
 
