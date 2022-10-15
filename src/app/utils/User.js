@@ -6,6 +6,7 @@ export const addUser = () => {
 export const addUserNew = (data) => {
     console.log(data);
      const users = JSON.parse(localStorage.getItem('users'));
+     console.log(users);
      const userFilterByEmail = users.filter(item => item.email === data.email);
 
 

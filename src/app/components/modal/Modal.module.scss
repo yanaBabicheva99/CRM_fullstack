@@ -12,6 +12,7 @@
     width: 428px;
     padding: 64px 64px 32px;
     background-color: #fff;
+
   }
 
   &__header {
@@ -58,4 +59,8 @@
 }
 .select {
   width: 100%;
+}
+
+.modal__content_wrapper {
+   overflow-y: auto;
 }

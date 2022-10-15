@@ -5,7 +5,7 @@ const ProductsContext = React.createContext();
 
 
 export const useProducts = () => {
-    return useContext(ProductsContext)
+    return useContext(ProductsContext);
 }
 
 export const ProductsProvider = ({children}) => {
@@ -53,6 +53,7 @@ export const ProductsProvider = ({children}) => {
 
     const updateProduct = (id, quantity) => {
         const product = products.find(product => product.id === id);
+
         const updateProduct = {
             ...product,
             remains: product.remains - quantity
