@@ -11,7 +11,6 @@ const Modal = ({children, visible, handleVisible}) => {
 
     return (
         <div className={rootClasses()} onClick={handleVisible}>
-            <div className={style.modal__content_wrapper}>
             <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
                 {children}
                 <button
@@ -20,7 +19,6 @@ const Modal = ({children, visible, handleVisible}) => {
                 >
                     <IconClose className={style.modal__btn_close}/>
                 </button>
-            </div>
             </div>
         </div>
     );

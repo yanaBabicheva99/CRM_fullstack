@@ -2,31 +2,39 @@ import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import SellForm from "../../form/productForm/SellForm";
 import Modal from '../../modal/Modal';
+import {useModal} from "../../../hooks/useModal";
 
-import {useModalContextAction} from "../../../hooks/useModalContextAction";
+
 const Main = () => {
    const lacationState = useLocation();
-    const [open, setOpen] = useModalContextAction();
+    const {visible, setVisible} = useModal();
 
    const {id, remains} = lacationState.state || {id: null, remains: null};
 
+    const handleOpen = () => {
+        setVisible({sell: true});
+    };
+    const handleClose = () => {
+        setVisible({sell: false});
+    };
+
     useEffect(() => {
         if (id !== null) {
-          setOpen({open: true});
+            handleOpen();
         }
     }, []);
 
     return ( <>
         <h1>Main</h1>
                 <Modal
-                    visible={open.open}
-                    handleVisible={() => setOpen({open: false})}
+                    visible={visible.sell}
+                    handleVisible={handleClose}
                 >
                     {id !== null && (
                     <SellForm
                         id={id}
                         quantity={remains}
-                        handleVisible={() => setOpen({open: false})}
+                        handleVisible={handleClose}
                     />)}
                 </Modal>
         </>

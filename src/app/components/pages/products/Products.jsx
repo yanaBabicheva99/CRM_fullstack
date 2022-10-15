@@ -3,13 +3,20 @@ import ProductsTable from "../../table/productsTable/ProductsTable";
 import {useProducts} from "../../../hooks/useProducts";
 import Modal from "../../modal/Modal";
 import ProductFormEdit from "../../form/productForm/ProductFormEdit";
-import {useModalContextAction} from "../../../hooks/useModalContextAction";
+import {useModal} from "../../../hooks/useModal";
 
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
     const {products, loading, deleteProduct} = useProducts();
-    const [open, setOpen] = useModalContextAction();
+    const {visible, setVisible} = useModal();
+
+    const handleOpen = () => {
+        setVisible({edit: true});
+    };
+    const handleClose = () => {
+        setVisible({edit: false})
+    };
 
     const handleDelete = (id) => {
         deleteProduct(id);
@@ -28,16 +35,16 @@ const Products = () => {
                    products={products}
                    handleDelete={handleDelete}
                    onCurrentProduct={handleCurrentProduct}
-                   onVisibleEdit={() => setOpen({open: true})}
+                   onVisibleEdit={handleOpen}
                />
                <Modal
-                   visible={open.open}
-                   handleVisible={() => setOpen({open: false})}
+                   visible={visible.edit}
+                   handleVisible={handleClose}
                >
                    {currentProduct && (
                        <ProductFormEdit
                            data={currentProduct}
-                           handleVisible={() => setOpen({open: false})}
+                           handleVisible={handleClose}
                        />)
                    }
                </Modal>

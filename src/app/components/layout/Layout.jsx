@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-import {useModalContext} from "../../hooks/useModalContext";
 import Menu from "../menu/Menu";
 import Modal from "../modal/Modal";
 import ProductFormAdd from "../form/productForm/ProductFormAdd";
@@ -9,12 +7,19 @@ import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
 
 
 import style from './Layout.module.scss';
+import {useModal} from "../../hooks/useModal";
 
 
 
 const Layout = ({children, title, subtitle}) => {
-   const [visible, setVisible] = useModalContext();
+   const {visible, setVisible} = useModal();
 
+   const handleOpen = () => {
+       setVisible({create: true});
+   };
+   const handleClose = () => {
+       setVisible({create: false})
+   }
     return (
         <div className={style.layout__wrapper}>
             <Menu/>
@@ -26,7 +31,7 @@ const Layout = ({children, title, subtitle}) => {
                     </div>
                     <button
                         className={style.layout__btn}
-                        onClick={() => setVisible({visible: true})}
+                        onClick={handleOpen}
                     >
                         <IconBtn className={style.layout__btn_add}/>
                         <span>Create a product</span>
@@ -37,11 +42,11 @@ const Layout = ({children, title, subtitle}) => {
                 </section>
             </div>
             <Modal
-                visible={visible.visible}
-                handleVisible={() => setVisible({visible: false})}
+                visible={visible.create}
+                handleVisible={handleClose}
             >
                 <ProductFormAdd
-                    handleVisible={() => setVisible({visible: false})}
+                    handleVisible={handleClose}
                 />
             </Modal>
         </div>
