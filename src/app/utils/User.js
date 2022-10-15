@@ -29,6 +29,7 @@ export const existenceCheckUser = (data) => {
     if (userFindByEmail === undefined) {
         console.log('Пользователь с данной почтой не найден, проверьте введенные данные');
     } else if (userFindByEmail.password !== data.password){
+        console.log(userFindByEmail.password, data.password);
         console.log('Неверный пароль');
     }
     else {

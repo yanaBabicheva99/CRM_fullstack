@@ -11,13 +11,19 @@ export const getData = () => {
     }
     return day + '.' + month + '.' + year;
 };
-export const getPrice = (price) => {
-    const newPrice = String(price);
-    return '$' + newPrice[0] + ' ' + newPrice.slice(1);
-};
+
+// export const getPrice = (price) => {
+//     const newPrice = String(price);
+//     if (newPrice.length === 1 || newPrice.length === 2 || newPrice.length === 3) {
+//         return  '$' + newPrice;
+//     }
+//     return '$' + newPrice[0] + ' ' + newPrice.slice(1);
+// };
+
 export const getWeight = (weight) => {
     return weight + 'kg'
 };
+
 const products = [];
 export const getProducts = () => {
     if (!localStorage.getItem('products')) {
@@ -25,3 +31,34 @@ export const getProducts = () => {
     }
     return JSON.parse(localStorage.getItem('products'));
 }
+
+
+export function getPrice(amount) {
+    const offset = 3;
+    const price = amount.toString();
+
+    let fmtPrice = '';
+
+    if (price.length > offset) {
+        let iter = 0;
+
+        for (let count = price.length - 1; count >= 0; count--) {
+            iter++
+            switch (iter % offset) {
+                case 1:
+                    fmtPrice += ` ${price[count]}`;
+                    continue
+
+                default:
+                    fmtPrice += price[count];
+            }
+        }
+
+        return '$' + fmtPrice.split("").reverse().join("")
+
+    } else {
+        return  '$' + price
+    }
+}
+
+

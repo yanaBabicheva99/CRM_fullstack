@@ -7,6 +7,7 @@ import InputForm from "../inputForm/InputForm";
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
 import {useProducts} from "../../../hooks/useProducts";
+import {useSales} from "../../../hooks/useSales";
 
 const AddProductSchema = Yup.object().shape({
     store: Yup
@@ -63,11 +64,14 @@ const ProductFormEdit = ({handleVisible, data}) => {
     const {id, address, creationData, ...dataProduct} = data;
 
     const {changeProduct} = useProducts();
+    const {changeSoldProduct} = useSales();
+
     const initialValues = dataProduct;
 
     const Edit = (data) => {
         const updateData = {...data, remains: Number(data.remains)}
-        changeProduct({id, ...updateData});
+        const dataProduct = changeProduct({id, ...updateData});
+        changeSoldProduct(dataProduct);
         handleVisible();
     };
     return (

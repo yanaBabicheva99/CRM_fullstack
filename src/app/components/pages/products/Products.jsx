@@ -4,7 +4,7 @@ import {useProducts} from "../../../hooks/useProducts";
 import Modal from "../../modal/Modal";
 import ProductFormEdit from "../../form/productForm/ProductFormEdit";
 import {useModal} from "../../../hooks/useModal";
-
+import style from '../../../style/title/Title.module.scss';
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -31,23 +31,30 @@ const Products = () => {
     } else {
        return (
            <>
-               <ProductsTable
-                   products={products}
-                   handleDelete={handleDelete}
-                   onCurrentProduct={handleCurrentProduct}
-                   onVisibleEdit={handleOpen}
-               />
-               <Modal
-                   visible={visible.edit}
-                   handleVisible={handleClose}
-               >
-                   {currentProduct && (
-                       <ProductFormEdit
-                           data={currentProduct}
+               {products.length === 0
+                   ? <div className={style.title__wrapper}>
+                       <h2 className={style.title}>Products not found</h2>
+                   </div>
+                   : <>
+                       <ProductsTable
+                           products={products}
+                           handleDelete={handleDelete}
+                           onCurrentProduct={handleCurrentProduct}
+                           onVisibleEdit={handleOpen}
+                       />
+                       <Modal
+                           visible={visible.edit}
                            handleVisible={handleClose}
-                       />)
-                   }
-               </Modal>
+                       >
+                           {currentProduct && (
+                               <ProductFormEdit
+                                   data={currentProduct}
+                                   handleVisible={handleClose}
+                               />)
+                           }
+                       </Modal>
+                   </>
+               }
            </>
        )
     }

@@ -15,7 +15,7 @@ import './style/index.module.scss';
 import { Routes } from './constants'
 import {ProductsProvider} from "./hooks/useProducts";
 
-import {SellProvider} from "./hooks/useSellProducts";
+import {SalesProvider} from "./hooks/useSales";
 import {ModalProvider} from "./hooks/useModal";
 
 function App() {
@@ -63,7 +63,7 @@ function App() {
         <ModalProvider>
             <div className="App">
                 <ProductsProvider>
-                    <SellProvider>
+                    <SalesProvider>
                         <Switch>
                             {
                                 pages.map(item => (
@@ -93,7 +93,7 @@ function App() {
                                 ))
                             }
                         </Switch>
-                    </SellProvider>
+                    </SalesProvider>
                 </ProductsProvider>
             </div>
         </ModalProvider>

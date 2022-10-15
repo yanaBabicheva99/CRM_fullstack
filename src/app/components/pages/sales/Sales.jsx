@@ -1,14 +1,20 @@
 import React from 'react';
 import SalesTable from "../../table/salesTable/SalesTable";
-import {useSellProducts} from "../../../hooks/useSellProducts";
+import {useSales} from "../../../hooks/useSales";
+import style from "../../../style/title/Title.module.scss";
 
 const Sales = () => {
-    const {sellProducts} = useSellProducts();
+    const {soldProducts} = useSales();
     return (
       <>
-          <SalesTable
-              sellProducts={sellProducts}
-          />
+          {soldProducts.length === 0
+              ? <div className={style.title__wrapper}>
+                  <h2 className={style.title}>Sales not found</h2>
+              </div>
+              : <SalesTable
+                  sellProducts={soldProducts}
+              />
+          }
       </>
     );
 };

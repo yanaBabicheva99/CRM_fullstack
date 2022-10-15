@@ -19,60 +19,67 @@ export const ProductsProvider = ({children}) => {
     }, []);
 
     const deleteProduct = (id) => {
-        const updateProducts = products.filter(product => product.id !== id);
-        localStorage.setItem('products', JSON.stringify(updateProducts));
-        setProducts(updateProducts);
+        const updatedProducts = products.filter(product => product.id !== id);
+        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts);
     }
 
     const addProduct = (data) => {
-        const updateProducts = [...products,  {
+        const updatedProducts = [...products,  {
             id: Date.now(),
             ...data,
             address: '15 Krylatskaya',
             creationData: getData(),
         }];
-        localStorage.setItem('products', JSON.stringify(updateProducts));
-        setProducts(updateProducts);
+        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts);
     }
 
     const changeProduct = (data) => {
         console.log('change', data);
-          const updateProducts = products.map(product => {
-              if (product.id === data.id) {
-                  return {
-                      ...data,
-                      address: '15 Krylatskaya',
-                      creationData: product.creationData,
-                  };
-              }
-              return product;
-          });
-        localStorage.setItem('products', JSON.stringify(updateProducts));
-        setProducts(updateProducts);
+        const product = products.find(product => product.id === data.id);
+
+        const updatedProduct = {
+            ...data,
+            address: product.address,
+            creationData: product.creationData,
+        };
+
+        const updatedProducts = products.map(product => {
+            if (product.id === data.id) {
+                return updatedProduct
+            }
+            return product;
+        });
+
+        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts);
+
+        return updatedProduct;
     }
 
     const updateProduct = (id, quantity) => {
         const product = products.find(product => product.id === id);
 
-        const updateProduct = {
+        const updatedProduct = {
             ...product,
             remains: product.remains - quantity
         };
 
-        if (updateProduct.remains === 0) {
-            deleteProduct(updateProduct.id);
+        if (updatedProduct.remains === 0) {
+            deleteProduct(updatedProduct.id);
             return product;
         }
 
-         const updateProducts = products.map(product => {
+         const updatedProducts = products.map(product => {
              if (product.id === id) {
-                 return updateProduct;
+                 return updatedProduct;
              }
              return product;
          });
 
-        localStorage.setItem('products', JSON.stringify(updateProducts));
-        setProducts(updateProducts);
+        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        setProducts(updatedProducts);
         return product;
     }
 

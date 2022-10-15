@@ -10,11 +10,11 @@ import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
-import {useSellProducts} from "../../../hooks/useSellProducts";
+import {useSales} from "../../../hooks/useSales";
 import {useProducts} from "../../../hooks/useProducts";
 
 const SellForm = ({handleVisible, quantity, id}) => {
-    const {addSellProduct} = useSellProducts();
+    const {addSoldProduct} = useSales();
     const {updateProduct} = useProducts();
 
     const AddProductSchema = Yup.object().shape({
@@ -46,15 +46,27 @@ const SellForm = ({handleVisible, quantity, id}) => {
         {value: 'Sun', label: 'Sunday'},
     ];
 
+    const day = String(new Date().getDay());
+
+    const days = {
+        '1': 'Mon',
+        '2': 'Tue',
+        '3': 'Wed',
+        '4': 'Thu',
+        '5': 'Fri',
+        '6': 'Sat',
+        '7': 'Sun'
+    };
+
     const initialValues = {
         quantity,
-        day: 'Mon'
+        day: days[day]
     };
 
     const sell = ({quantity, day}) => {
         const updateQuantity = Number(quantity);
         const data = updateProduct(id, updateQuantity);
-        addSellProduct(data,updateQuantity, day)
+        addSoldProduct(data,updateQuantity, day)
         handleVisible();
     };
 
