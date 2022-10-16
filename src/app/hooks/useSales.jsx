@@ -59,7 +59,7 @@ export const SalesProvider = ({children}) => {
         const soldProduct = soldProducts.find(product => product.id === data.id);
 
         if (soldProduct !== undefined) {
-            const {remains, ...newData} = data;
+            const {remains, id, ...newData} = data;
 
             const updateSoldProduct = {
                 ...soldProduct,

@@ -17,6 +17,7 @@ import {ProductsProvider} from "./hooks/useProducts";
 
 import {SalesProvider} from "./hooks/useSales";
 import {ModalProvider} from "./hooks/useModal";
+import UserProvider from "./hooks/useUser";
 
 function App() {
 
@@ -62,39 +63,41 @@ function App() {
     return (
         <ModalProvider>
             <div className="App">
-                <ProductsProvider>
-                    <SalesProvider>
-                        <Switch>
-                            {
-                                pages.map(item => (
-                                    <Route
-                                        key={item.title}
-                                        path={item.path}
-                                        element={
-                                            <Layout
-                                                title={item.title}
-                                                subtitle={item.subtitle}
-                                            >
-                                                {item.component}
-                                            </Layout>
-                                        }/>
-                                ))
-                            }
-                            {
-                                loginPages.map(item => (
-                                    <Route
-                                        key={item.title}
-                                        path={item.path}
-                                        element={
-                                            <Login title={item.title}>
-                                                {item.component}
-                                            </Login>
-                                        }/>
-                                ))
-                            }
-                        </Switch>
-                    </SalesProvider>
-                </ProductsProvider>
+                <UserProvider>
+                    <ProductsProvider>
+                        <SalesProvider>
+                            <Switch>
+                                {
+                                    pages.map(item => (
+                                        <Route
+                                            key={item.title}
+                                            path={item.path}
+                                            element={
+                                                <Layout
+                                                    title={item.title}
+                                                    subtitle={item.subtitle}
+                                                >
+                                                    {item.component}
+                                                </Layout>
+                                            }/>
+                                    ))
+                                }
+                                {
+                                    loginPages.map(item => (
+                                        <Route
+                                            key={item.title}
+                                            path={item.path}
+                                            element={
+                                                <Login title={item.title}>
+                                                    {item.component}
+                                                </Login>
+                                            }/>
+                                    ))
+                                }
+                            </Switch>
+                        </SalesProvider>
+                    </ProductsProvider>
+                </UserProvider>
             </div>
         </ModalProvider>
     );

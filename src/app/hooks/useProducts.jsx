@@ -31,23 +31,17 @@ export const ProductsProvider = ({children}) => {
             address: '15 Krylatskaya',
             creationData: getData(),
         }];
+
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         setProducts(updatedProducts);
     }
 
     const changeProduct = (data) => {
         console.log('change', data);
-        const product = products.find(product => product.id === data.id);
-
-        const updatedProduct = {
-            ...data,
-            address: product.address,
-            creationData: product.creationData,
-        };
 
         const updatedProducts = products.map(product => {
             if (product.id === data.id) {
-                return updatedProduct
+                return data;
             }
             return product;
         });
@@ -55,7 +49,7 @@ export const ProductsProvider = ({children}) => {
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         setProducts(updatedProducts);
 
-        return updatedProduct;
+        return data;
     }
 
     const updateProduct = (id, quantity) => {

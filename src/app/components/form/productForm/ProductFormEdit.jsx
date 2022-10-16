@@ -70,7 +70,7 @@ const ProductFormEdit = ({handleVisible, data}) => {
 
     const Edit = (data) => {
         const updateData = {...data, remains: Number(data.remains)}
-        const dataProduct = changeProduct({id, ...updateData});
+        const dataProduct = changeProduct({id, address, creationData, ...updateData});
         changeSoldProduct(dataProduct);
         handleVisible();
     };

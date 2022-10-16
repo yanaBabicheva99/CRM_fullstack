@@ -25,6 +25,7 @@ export const existenceCheckUser = (data) => {
 
     const users = JSON.parse(localStorage.getItem('users'));
     const userFindByEmail = users.find(item => item.email === data.email);
+
     if (userFindByEmail === undefined) {
         console.log('Пользователь с данной почтой не найден, проверьте введенные данные');
     } else if (userFindByEmail.password !== data.password){
@@ -36,6 +37,8 @@ export const existenceCheckUser = (data) => {
     }
 }
 
-export const getUser = () => {
-    return JSON.parse(localStorage.getItem('user'));
+export const getUserInfo = () => {
+    const users = JSON.parse(localStorage.getItem('users'));
+    const user = JSON.parse(localStorage.getItem('user'));
+    return users.find(u => u.email === user.email);
 }

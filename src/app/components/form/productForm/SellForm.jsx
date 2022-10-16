@@ -55,7 +55,7 @@ const SellForm = ({handleVisible, quantity, id}) => {
         '4': 'Thu',
         '5': 'Fri',
         '6': 'Sat',
-        '7': 'Sun'
+        '0': 'Sun'
     };
 
     const initialValues = {
@@ -66,7 +66,7 @@ const SellForm = ({handleVisible, quantity, id}) => {
     const sell = ({quantity, day}) => {
         const updateQuantity = Number(quantity);
         const data = updateProduct(id, updateQuantity);
-        addSoldProduct(data,updateQuantity, day)
+        addSoldProduct(data, updateQuantity, day)
         handleVisible();
     };
 
