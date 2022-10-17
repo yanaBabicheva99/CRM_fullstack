@@ -3,8 +3,11 @@ import {getPrice, getWeight} from "../../../utils/Products";
 import Actions from "../../actions/Actions";
 import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
+import {useUser} from "../../../hooks/useUser";
+import {Link} from "react-router-dom";
 
 const ProductsTable = ({products, handleDelete, onCurrentProduct, onVisibleEdit}) => {
+    const {user} = useUser();
 const columns = {
     productName: {
         path: 'productName',
@@ -16,7 +19,8 @@ const columns = {
     },
     address: {
         path: 'address',
-        name: 'Address'
+        name: 'Address',
+        component: () => user.address.trim() || <Link to='/personal'>address</Link>
     },
     category: {
         path: 'category',

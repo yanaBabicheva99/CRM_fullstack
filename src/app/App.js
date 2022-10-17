@@ -8,8 +8,6 @@ import Layout from "./components/layout/Layout";
 import Main from "./components/pages/main/Main";
 import Products from "./components/pages/products/Products";
 import Sales from "./components/pages/sales/Sales";
-import Personal from "./components/pages/personal/Personal";
-
 
 import './style/index.module.scss';
 import { Routes } from './constants'
@@ -18,6 +16,7 @@ import {ProductsProvider} from "./hooks/useProducts";
 import {SalesProvider} from "./hooks/useSales";
 import {ModalProvider} from "./hooks/useModal";
 import UserProvider from "./hooks/useUser";
+import Personal from "./components/pages/personal/Personal";
 
 function App() {
 

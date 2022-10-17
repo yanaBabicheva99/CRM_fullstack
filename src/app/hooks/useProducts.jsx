@@ -28,7 +28,7 @@ export const ProductsProvider = ({children}) => {
         const updatedProducts = [...products,  {
             id: Date.now(),
             ...data,
-            address: '15 Krylatskaya',
+            // address: '15 Krylatskaya',
             creationData: getData(),
         }];
 

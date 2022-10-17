@@ -1,5 +1,5 @@
 import React from 'react';
-import "../productsTable/ProductsTable.module.scss";
+import "../Table.module.scss";
 
 const TableBody = ({columns, items}) => {
     const renderContent = (item, column) => {

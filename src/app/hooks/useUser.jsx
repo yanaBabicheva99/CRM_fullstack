@@ -8,7 +8,7 @@ export const useUser = () => {
 }
 
 export const UserProvider = ({children}) => {
-    const [user, setUser] = useState({address: '', oldPassword: '', newPassword: ''});
+    const [user, setUser] = useState({address: ''});
 
     useEffect(() => {
         const userInfo = getUserInfo();
@@ -25,7 +25,34 @@ export const UserProvider = ({children}) => {
 
     }, []);
 
-    return <UserContext.Provider value={{user}}>
+    const changeUserInfo = (data) => {
+        const {newPassword, oldPassword, ...newData} = data;
+
+        const userInfo = JSON.parse(localStorage.getItem('user'));
+        localStorage.setItem('user', JSON.stringify({...user, ...newData}));
+        const usersInfo = JSON.parse(localStorage.getItem('users'));
+
+       const updateUsersInfo = usersInfo.map(user => {
+            if (user.email === userInfo.email) {
+                return {
+                    ...user,
+                    ...newData
+                }
+            }
+            return user;
+        })
+
+        localStorage.setItem('users', JSON.stringify(updateUsersInfo));
+
+        setUser(prevState => (
+            {
+                ...prevState,
+                ...newData
+            }
+        ))
+    }
+
+    return <UserContext.Provider value={{user, changeUserInfo}}>
         {children}
     </UserContext.Provider>
 };

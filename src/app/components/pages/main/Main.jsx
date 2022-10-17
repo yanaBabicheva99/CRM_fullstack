@@ -3,11 +3,14 @@ import {useLocation} from 'react-router-dom';
 import SellForm from "../../form/productForm/SellForm";
 import Modal from '../../modal/Modal';
 import {useModal} from "../../../hooks/useModal";
+import {Pie} from "../../Charts/Pie/Pie";
+import {useSales} from "../../../hooks/useSales";
 
 
 const Main = () => {
    const lacationState = useLocation();
     const {visible, setVisible} = useModal();
+    const {soldProducts} = useSales();
 
    const {id, remains} = lacationState.state || {id: null, remains: null};
 
@@ -24,8 +27,13 @@ const Main = () => {
         }
     }, []);
 
-    return ( <>
-        <h1>Main</h1>
+
+    return (<>
+        {/*<div className={style.statistics}>*/}
+        {/*    <div></div>*/}
+        {/*    <div></div>*/}
+        {/*</div>*/}
+            {soldProducts?.length !== 0 && <Pie arrOptions={soldProducts} />}
                 <Modal
                     visible={visible.sell}
                     handleVisible={handleClose}

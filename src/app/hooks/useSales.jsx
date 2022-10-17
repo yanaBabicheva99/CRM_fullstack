@@ -10,7 +10,7 @@ export const useSales = () => {
 }
 
 export const SalesProvider = ({children}) => {
-    const [soldProducts, setSoldProducts] = useState();
+    const [soldProducts, setSoldProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

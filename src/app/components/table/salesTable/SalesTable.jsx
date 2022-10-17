@@ -2,10 +2,12 @@ import React from 'react';
 import {getPrice, getWeight} from "../../../utils/Products";
 import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
+import {Link} from "react-router-dom";
+import {useUser} from "../../../hooks/useUser";
 
 
 const SalesTable = ({sellProducts}) => {
-
+    const {user} = useUser();
     const columns = {
         productName: {
             path: 'productName',
@@ -17,7 +19,8 @@ const SalesTable = ({sellProducts}) => {
         },
         address: {
             path: 'address',
-            name: 'Address'
+            name: 'Address',
+            component: () => user.address.trim() || <Link to='/personal'>address</Link>
         },
         category: {
             path: 'category',
