@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-export const UsePie = () => {
+
+export const usePie = (arrOptions) => {
+
     const day = String(new Date().getDay());
-
     const days = {
         '1': 'Mon',
         '2': 'Tue',
@@ -13,13 +14,61 @@ export const UsePie = () => {
         '0': 'Sun'
     };
 
-    const dayNow = days[day];
-    const [soldProductsToday, setSoldProductsToday] = useState([]);
+    const [soldProducts, setSoldProducts] = useState([]);
 
-    const addSoldProductToday = (soldProducts) => {
-        const updatedData = soldProducts.filter(product => product.day === dayNow);
-        setSoldProductsToday(updatedData);
-        return soldProductsToday;
+    useEffect(() => {
+        const soldProductsToday = arrOptions.filter(product => product.day === days[day]);
+        const data = soldProductsToday.map(product => {
+            return {
+                value: product.quantity,
+                name: product.productName
+            }
+        });
+        setSoldProducts(data)
+    }, [arrOptions]);
+
+    const options = {
+        title: {
+            text: 'Sales schedule by day',
+            left: 'left'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            icon: 'circle',
+            top: '23%',
+            orient: 'vertical',
+            left: '35%'
+        },
+        series: [
+            {
+                name: 'Access From',
+                type: 'pie',
+                radius: ['0%', '70%'],
+                left: -20,
+                bottom: 50,
+                width: 197,
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: soldProducts
+            }
+        ]
     }
-    return {addSoldProductToday}
+
+    return {soldProducts, options}
 };
+
+

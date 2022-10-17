@@ -1,0 +1,17 @@
+.statistics {
+  width: 100%;
+  border-top: 1px solid rgba(43, 56, 68, 0.08);
+
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  &__day {
+     width: 455px;
+  }
+
+  &__overview {
+     width: 735px;
+  }
+
+}

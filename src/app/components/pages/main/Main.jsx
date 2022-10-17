@@ -6,6 +6,8 @@ import {useModal} from "../../../hooks/useModal";
 import {Pie} from "../../Charts/Pie/Pie";
 import {useSales} from "../../../hooks/useSales";
 
+import style from './Main.module.scss'
+import {Bar} from "../../Charts/Bar/Bar";
 
 const Main = () => {
    const lacationState = useLocation();
@@ -29,11 +31,14 @@ const Main = () => {
 
 
     return (<>
-        {/*<div className={style.statistics}>*/}
-        {/*    <div></div>*/}
-        {/*    <div></div>*/}
-        {/*</div>*/}
-            {soldProducts?.length !== 0 && <Pie arrOptions={soldProducts} />}
+        <div className={style.statistics}>
+            <div className={style.statistics__day}>
+                {soldProducts.length !== 0 && <Pie arrOptions={soldProducts} />}
+            </div>
+            <div className={style.statistics__overview}>
+                {soldProducts.length !== 0 && <Bar arrOptions={soldProducts} />}
+            </div>
+        </div>
                 <Modal
                     visible={visible.sell}
                     handleVisible={handleClose}
