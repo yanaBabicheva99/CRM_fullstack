@@ -30,7 +30,13 @@ export const usePie = (arrOptions) => {
     const options = {
         title: {
             text: 'Sales schedule by day',
-            left: 'left'
+            left: 'left',
+            color: '#2B3844',
+            textStyle: {
+                fontSize: 18,
+                fontWeight: "bold",
+                fontFamily: 'Inter',
+            },
         },
         tooltip: {
             trigger: 'item'
@@ -39,7 +45,10 @@ export const usePie = (arrOptions) => {
             icon: 'circle',
             top: '23%',
             orient: 'vertical',
-            left: '35%'
+            itemWidth: 10,
+            right: '25%',
+            itemGap: 33,
+            color: '#2B3844',
         },
         series: [
             {
@@ -48,7 +57,7 @@ export const usePie = (arrOptions) => {
                 radius: ['0%', '70%'],
                 left: -20,
                 bottom: 50,
-                width: 197,
+                width: 250,
                 avoidLabelOverlap: false,
                 label: {
                     show: false,

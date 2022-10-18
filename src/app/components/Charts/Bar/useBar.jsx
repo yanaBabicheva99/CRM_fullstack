@@ -19,11 +19,6 @@ export const useBar = (arrOptions) => {
     let dataDays = [];
     let dataValues = [];
 
-    useEffect(() => {
-        console.log(soldProductsDays);
-        console.log(soldProductsValues);
-    }, [soldProductsDays, soldProductsValues]);
-
     const getProductsInfo = (day) => {
         const soldProducts = arrOptions.filter(product => product.day === day);
         dataDays.push(day);
@@ -49,8 +44,49 @@ export const useBar = (arrOptions) => {
     }, [arrOptions]);
 
     const options = {
+        title: {
+            text: 'Sales Overview',
+            subtext: 'Graph sales for all daysnby',
+            left: 'center',
+            color: '#2B3844',
+            textStyle: {
+                fontSize: 18,
+                fontWeight: "bold",
+                fontFamily: 'Inter',
+            },
+            subtextStyle: {
+                fontSize: 12,
+                fontFamily: 'Inter',
+            },
+        },
+        grid: {
+            left: '4%',
+            bottom: 32,
+            width: '90%',
+            height: '80%',
+            show: true,
+            containLabel: true,
+            borderColor: 'rgba(232, 235, 239, 0.4)',
+
+        },
         xAxis: {
             type: 'category',
+            // offset: 20,
+
+            axisLine: {
+                show: false
+            },
+
+            axisTick: {
+                alignWithLabel: false,
+                show: false
+            },
+
+            axisLabel: {
+                margin: 27,
+                fontSize: 12,
+            },
+
             data: soldProductsDays
         },
         yAxis: {
@@ -58,9 +94,12 @@ export const useBar = (arrOptions) => {
         },
         series: [
             {
+                type: 'bar',
+                right: -40,
+                top: 50,
                 data: soldProductsValues,
-                type: 'bar'
-            }
+            },
+
         ]
     };
 

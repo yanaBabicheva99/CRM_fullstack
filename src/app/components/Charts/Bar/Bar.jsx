@@ -8,7 +8,15 @@ export const Bar = ({arrOptions}) => {
 
     return (
         <>
-            {soldProductsDays.length !== 0 && <ReactECharts option={options}/>}
+            {soldProductsDays.length !== 0 &&
+                <ReactECharts
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                    }}
+                    option={options}
+                />
+            }
         </>
     )
 }
