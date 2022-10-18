@@ -31,14 +31,16 @@ const Main = () => {
 
 
     return (<>
-        <div className={style.statistics}>
-            <div className={style.statistics__day}>
-                {soldProducts.length !== 0 && <Pie arrOptions={soldProducts} />}
-            </div>
-            <div className={style.statistics__overview}>
-                {soldProducts.length !== 0 && <Bar arrOptions={soldProducts} />}
-            </div>
-        </div>
+            {soldProducts.length !== 0 &&
+                <div className={style.statistics}>
+                    <div className={style.statistics__day}>
+                        <Pie arrOptions={soldProducts}/>
+                    </div>
+                    <div className={style.statistics__overview}>
+                        <Bar arrOptions={soldProducts}/>
+                    </div>
+                </div>
+            }
                 <Modal
                     visible={visible.sell}
                     handleVisible={handleClose}
