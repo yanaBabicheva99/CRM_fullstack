@@ -40,5 +40,5 @@ export const existenceCheckUser = (data) => {
 export const getUserInfo = () => {
     const users = JSON.parse(localStorage.getItem('users'));
     const user = JSON.parse(localStorage.getItem('user'));
-    return users.find(u => u.email === user.email);
+    return users?.find(u => u.email === user.email) || {name: '', lastName: '', companyName: '', email: ''};
 }

@@ -4,6 +4,7 @@ import {useBar} from "./useBar";
 
 
 export const Bar = ({arrOptions}) => {
+    console.log(arrOptions);
     const {soldProductsDays, options} = useBar(arrOptions);
 
     return (

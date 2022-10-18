@@ -35,12 +35,8 @@ const Main = () => {
             {soldProducts.length !== 0 &&
                 <div className={style.statistics}>
                     <div className={style.statistics__column}>
-                        <div className={style.statistics__day}>
                             <Pie arrOptions={soldProducts}/>
-                        </div>
-                        <div className={style.statistics__day}>
                             <Line arrOptions={soldProducts}/>
-                        </div>
                     </div>
                     <div className={style.statistics__overview}>
                         <Bar arrOptions={soldProducts}/>

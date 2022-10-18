@@ -24,7 +24,7 @@ export const SalesProvider = ({children}) => {
         const soldProduct = soldProducts.find(product => product.id === soldData.id);
 
         if (soldProduct !== undefined) {
-           return updateSoldProduct(soldProduct, quantity);
+           return updateSoldProduct(soldProduct, quantity, day);
         }
         const updatedSoldProducts = [...soldProducts,
             {
@@ -38,10 +38,11 @@ export const SalesProvider = ({children}) => {
         setSoldProducts(updatedSoldProducts);
     }
 
-    const updateSoldProduct = (soldProduct, items) => {
+    const updateSoldProduct = (soldProduct, items, day) => {
 
         const updatedSoldProduct = {
             ...soldProduct,
+            day,
             quantity: soldProduct.quantity + items
         };
         const updatedSoldProducts = soldProducts.map(product => {
