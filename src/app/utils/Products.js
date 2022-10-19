@@ -54,7 +54,7 @@ export function getPrice(amount) {
 
 
 const products = [];
-export const getProducts = () => {
+export const getProductsStorage = () => {
     if (!localStorage.getItem('products')) {
         localStorage.setItem('products', JSON.stringify(products))
     }

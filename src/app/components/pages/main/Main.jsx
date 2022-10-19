@@ -4,16 +4,25 @@ import SellForm from "../../form/productForm/SellForm";
 import Modal from '../../modal/Modal';
 import {useModal} from "../../../hooks/useModal";
 import {Pie} from "../../Charts/Pie/Pie";
-import {useSales} from "../../../hooks/useSales";
 
 import style from './Main.module.scss'
 import {Bar} from "../../Charts/Bar/Bar";
 import {Line} from "../../Charts/Line/Line";
+import {useProducts} from "../../../hooks/useProducts";
+import {useState} from "react";
 
 const Main = () => {
    const lacationState = useLocation();
     const {visible, setVisible} = useModal();
-    const {soldProducts} = useSales();
+    const {products, getSoldProducts, loading} = useProducts();
+
+    const [soldProducts, setSoldProducts] = useState([]);
+
+    useEffect(() => {
+        if (!loading) {
+            setSoldProducts(getSoldProducts());
+        }
+    }, [loading, products]);
 
    const {id, remains} = lacationState.state || {id: null, remains: null};
 

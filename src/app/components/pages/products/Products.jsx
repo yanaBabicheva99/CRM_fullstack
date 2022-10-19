@@ -8,7 +8,16 @@ import style from '../../../style/title/Title.module.scss';
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
-    const {products, loading, deleteProduct} = useProducts();
+    const {products, getProducts, deleteProduct, loading} = useProducts();
+
+    const [allProducts, setAllProducts] = useState([]);
+
+    useEffect(() => {
+        if (!loading) {
+            setAllProducts(getProducts());
+        }
+    }, [products, loading]);
+
     const {visible, setVisible} = useModal();
 
     const handleOpen = () => {
@@ -19,7 +28,7 @@ const Products = () => {
     };
 
     const handleDelete = (id) => {
-        deleteProduct(id);
+       deleteProduct(id);
     };
 
     const handleCurrentProduct = (data) => {
@@ -31,13 +40,13 @@ const Products = () => {
     } else {
        return (
            <>
-               {products.length === 0
+               {allProducts.length === 0
                    ? <div className={style.title__wrapper}>
                        <h2 className={style.title}>Products not found</h2>
                    </div>
                    : <>
                        <ProductsTable
-                           products={products}
+                           products={allProducts}
                            handleDelete={handleDelete}
                            onCurrentProduct={handleCurrentProduct}
                            onVisibleEdit={handleOpen}

@@ -10,11 +10,9 @@ import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
-import {useSales} from "../../../hooks/useSales";
 import {useProducts} from "../../../hooks/useProducts";
 
 const SellForm = ({handleVisible, quantity, id}) => {
-    const {addSoldProduct} = useSales();
     const {updateProduct} = useProducts();
 
     const AddProductSchema = Yup.object().shape({
@@ -65,8 +63,7 @@ const SellForm = ({handleVisible, quantity, id}) => {
 
     const sell = ({quantity, day}) => {
         const updateQuantity = Number(quantity);
-        const data = updateProduct(id, updateQuantity);
-        addSoldProduct(data, updateQuantity, day)
+        updateProduct(id, updateQuantity, day);
         handleVisible();
     };
 

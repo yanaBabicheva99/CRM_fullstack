@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {getData, getProducts} from "../utils/Products";
+import {getData, getProductsStorage} from "../utils/Products";
 
 const ProductsContext = React.createContext();
 
@@ -13,15 +13,32 @@ export const ProductsProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-       const arrProducts = getProducts();
+       const arrProducts = getProductsStorage();
        setProducts(arrProducts);
        setLoading(false)
     }, []);
 
     const deleteProduct = (id) => {
-        const updatedProducts = products.filter(product => product.id !== id);
+        const updatedProducts = products.map(product => {
+            if (product.id === id) {
+                return {
+                    ...product,
+                    delete: true
+                }
+            }
+            return product
+        });
+
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         setProducts(updatedProducts);
+    }
+
+    const getProducts = () => {
+        return products.filter(product => product.remains !== 0 && !product.delete);
+    }
+
+    const getSoldProducts = () => {
+        return products.filter(product => product.quantity !== '');
     }
 
     const addProduct = (data) => {
@@ -30,6 +47,9 @@ export const ProductsProvider = ({children}) => {
             ...data,
             // address: '15 Krylatskaya',
             creationData: getData(),
+            day: '',
+            lastSale: '',
+            quantity: ''
         }];
 
         localStorage.setItem('products', JSON.stringify(updatedProducts));
@@ -38,32 +58,33 @@ export const ProductsProvider = ({children}) => {
 
     const changeProduct = (data) => {
         console.log('change', data);
+        const oldProduct = products.find(product => product.id === data.id);
 
         const updatedProducts = products.map(product => {
             if (product.id === data.id) {
-                return data;
+                return {
+                    ...oldProduct,
+                    ...data
+                };
             }
             return product;
         });
 
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         setProducts(updatedProducts);
-
-        return data;
     }
 
-    const updateProduct = (id, quantity) => {
+    const updateProduct = (id, newQuantity, day) => {
         const product = products.find(product => product.id === id);
+        const oldQuantity = Number(product.quantity);
 
         const updatedProduct = {
             ...product,
-            remains: product.remains - quantity
+            remains: product.remains - newQuantity || 0,
+            quantity: oldQuantity + newQuantity,
+            day,
+            lastSale: getData()
         };
-
-        if (updatedProduct.remains === 0) {
-            deleteProduct(updatedProduct.id);
-            return product;
-        }
 
          const updatedProducts = products.map(product => {
              if (product.id === id) {
@@ -74,16 +95,18 @@ export const ProductsProvider = ({children}) => {
 
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         setProducts(updatedProducts);
-        return product;
     }
 
     return <ProductsContext.Provider value={
-        {   products,
+        {
+            products,
             loading,
-            deleteProduct,
+            getProducts,
+            getSoldProducts,
             addProduct,
             changeProduct,
-            updateProduct
+            updateProduct,
+            deleteProduct
         }
     }>
         {children}

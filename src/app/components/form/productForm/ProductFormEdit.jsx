@@ -64,14 +64,12 @@ const ProductFormEdit = ({handleVisible, data}) => {
     const {id, creationData, ...dataProduct} = data;
 
     const {changeProduct} = useProducts();
-    const {changeSoldProduct} = useSales();
 
     const initialValues = dataProduct;
 
     const Edit = (data) => {
         const updateData = {...data, remains: Number(data.remains)}
-        const dataProduct = changeProduct({id, creationData, ...updateData});
-        changeSoldProduct(dataProduct);
+        changeProduct({id, ...updateData});
         handleVisible();
     };
     return (

@@ -1,10 +1,19 @@
 import React from 'react';
 import SalesTable from "../../table/salesTable/SalesTable";
-import {useSales} from "../../../hooks/useSales";
 import style from "../../../style/title/Title.module.scss";
+import {useProducts} from "../../../hooks/useProducts";
+import {useEffect, useState} from "react";
 
 const Sales = () => {
-    const {soldProducts} = useSales();
+    const {products, getSoldProducts, loading} = useProducts();
+
+    const [soldProducts, setSoldProducts] = useState([]);
+
+    useEffect(() => {
+        if (!loading) {
+            setSoldProducts(getSoldProducts());
+        }
+    }, [loading, products]);
     return (
       <>
           {soldProducts.length === 0
