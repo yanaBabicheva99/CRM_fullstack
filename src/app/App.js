@@ -64,7 +64,7 @@ function App() {
             <div className="App">
                 <UserProvider>
                     <ProductsProvider>
-                        <SalesProvider>
+                        {/*<SalesProvider>*/}
                             <Switch>
                                 {
                                     pages.map(item => (
@@ -94,7 +94,7 @@ function App() {
                                     ))
                                 }
                             </Switch>
-                        </SalesProvider>
+                        {/*</SalesProvider>*/}
                     </ProductsProvider>
                 </UserProvider>
             </div>

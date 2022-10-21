@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getData, getProductsStorage} from "../utils/Products";
+import axios from "axios";
 
 const ProductsContext = React.createContext();
 
@@ -13,24 +14,39 @@ export const ProductsProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-       const arrProducts = getProductsStorage();
-       setProducts(arrProducts);
-       setLoading(false)
+        const getAllProducts = async () => {
+            try {
+                const data = await axios.get('http://localhost:5000/api/products');
+                setProducts(data);
+                setLoading(false);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        getAllProducts()
     }, []);
 
-    const deleteProduct = (id) => {
-        const updatedProducts = products.map(product => {
-            if (product.id === id) {
-                return {
-                    ...product,
-                    delete: true
-                }
-            }
-            return product
-        });
 
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
-        setProducts(updatedProducts);
+
+    const deleteProduct = async (id) => {
+        const product = products.find(product => product._id === id);
+        const updateProduct = {
+            ...product,
+            delete: true
+        };
+        try {
+          const data = await axios.patch('http://localhost:5000/api/products/remove/' + id, updateProduct);
+            setProducts(products.map(product => {
+                if (product._id === data._id) {
+                    return data;
+                }
+                return product;
+            }));
+            
+        } catch(err) {
+            console.log(err);
+        }
+
     }
 
     const getProducts = () => {
